@@ -19,7 +19,7 @@ public class HitChecker : MonoBehaviour
         if (characterControllerForBrawler.hitGroundCheck) 
         {
             boxCollider2D.enabled = true;
-            Debug.Log("yok olmasý lazým");
+            
         }
     }
 
