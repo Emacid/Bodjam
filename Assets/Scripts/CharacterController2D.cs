@@ -13,6 +13,7 @@ public class CharacterController2D : MonoBehaviour
     public float gravityScale = 1.5f;
     public Camera mainCamera;
     private Animator animator;
+    public GetInsideMobs getInsideMobs;
 
     bool facingRight = true;
     float moveDirection = 0;
@@ -59,6 +60,11 @@ public class CharacterController2D : MonoBehaviour
             }
         }
 
+        if (Input.GetKey(KeyCode.Q)) 
+        {
+            StartCoroutine(getInsideMobs.GetBackToCharacterTwo());
+        }
+
         // Change facing direction
         if (moveDirection != 0)
         {
@@ -75,7 +81,7 @@ public class CharacterController2D : MonoBehaviour
         }
 
         // Jumping
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             r2d.velocity = new Vector2(r2d.velocity.x, jumpHeight);
         }

@@ -40,6 +40,7 @@ public class GetInsideMobs : MonoBehaviour
 
     public IEnumerator GetBackToCharacter() 
     {
+        Debug.Log("ABÝMM!");
         yield return new WaitForSeconds(10);
         timerScript.enabled = !timerScript.enabled;
         text.text = "";
@@ -52,6 +53,23 @@ public class GetInsideMobs : MonoBehaviour
         //Destroy(gameObject);
 
     }
+
+    public IEnumerator GetBackToCharacterTwo()
+    {
+        Debug.Log("ABÝMM!");
+        yield return new WaitForSeconds(.5f);
+        timerScript.enabled = !timerScript.enabled;
+        text.text = "";
+        VirtualCamera.Follow = player.transform;
+        characterController2D.enabled = false;
+        ghostController.enabled = true;
+        explodeParticle.Play();
+        spriteRenderer.enabled = false;
+        StartCoroutine(DestroyDelayed());
+        //Destroy(gameObject);
+
+    }
+
     IEnumerator DestroyDelayed() 
     {
         yield return new WaitForSeconds(2);
