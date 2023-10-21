@@ -10,6 +10,7 @@ public class HoverboardController : MonoBehaviour
     public float moveSpeed = 5.0f;
     public Camera mainCamera;
     private Animator animator;
+    
 
     private Rigidbody2D rb;
     private CapsuleCollider2D mainCollider;

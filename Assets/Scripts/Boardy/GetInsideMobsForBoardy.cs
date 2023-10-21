@@ -17,6 +17,7 @@ public class GetInsideMobsForBoardy : MonoBehaviour
     public ParticleSystem explodeParticle;
     private SpriteRenderer spriteRenderer;
     public GameObject DroneCanvas;
+    public GameObject dontGoDownBro;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class GetInsideMobsForBoardy : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("deneme");
+        dontGoDownBro.SetActive(true);
         // CharacterController2D bileþenini etkinleþtir veya devre dýþý býrak
         timerScript.enabled = !timerScript.enabled;
         DroneCanvas.SetActive(true);
