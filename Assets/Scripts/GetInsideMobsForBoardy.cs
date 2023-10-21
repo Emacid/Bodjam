@@ -5,10 +5,10 @@ using Cinemachine;
 using TarodevController;
 using UnityEngine.UI;
 
-public class GetInsideMobs : MonoBehaviour
+public class GetInsideMobsForBoardy : MonoBehaviour
 {
     public GameObject player;
-    private CharacterController2D characterController2D;
+    private HoverboardController characterController2D;
     public CinemachineVirtualCamera VirtualCamera;
     public PlayerController ghostController;
     private Animator animator;
@@ -20,7 +20,7 @@ public class GetInsideMobs : MonoBehaviour
 
     private void Awake()
     {
-        characterController2D = GetComponent<CharacterController2D>();
+        characterController2D = GetComponent<HoverboardController>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
@@ -38,7 +38,7 @@ public class GetInsideMobs : MonoBehaviour
 
     }
 
-    public IEnumerator GetBackToCharacter() 
+    public IEnumerator GetBackToCharacter()
     {
         yield return new WaitForSeconds(10);
         timerScript.enabled = !timerScript.enabled;
@@ -46,16 +46,16 @@ public class GetInsideMobs : MonoBehaviour
         VirtualCamera.Follow = player.transform;
         characterController2D.enabled = false;
         ghostController.enabled = true;
-        explodeParticle.Play();
-        spriteRenderer.enabled = false;
-        StartCoroutine(DestroyDelayed());
+        //explodeParticle.Play();
+        //spriteRenderer.enabled = false;
+        //StartCoroutine(DestroyDelayed());
         //Destroy(gameObject);
 
     }
-    IEnumerator DestroyDelayed() 
+    /*IEnumerator DestroyDelayed()
     {
         yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
-    
+    */
 }
