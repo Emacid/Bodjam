@@ -10,6 +10,7 @@ public class GetInsideMobsForBoardy : MonoBehaviour
     public GameObject player;
     private HoverboardController characterController2D;
     public CinemachineVirtualCamera VirtualCamera;
+    private Rigidbody2D rb;
     public PlayerController ghostController;
     private Animator animator;
     public TimerScript timerScript;
@@ -17,22 +18,24 @@ public class GetInsideMobsForBoardy : MonoBehaviour
     public ParticleSystem explodeParticle;
     private SpriteRenderer spriteRenderer;
     public GameObject DroneCanvas;
-    public GameObject dontGoDownBro;
+    
 
     private void Awake()
     {
         characterController2D = GetComponent<HoverboardController>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnMouseDown()
     {
         Debug.Log("deneme");
-        dontGoDownBro.SetActive(true);
+        
         // CharacterController2D bileþenini etkinleþtir veya devre dýþý býrak
         timerScript.enabled = !timerScript.enabled;
         DroneCanvas.SetActive(true);
+        
         characterController2D.enabled = !characterController2D.enabled;
         VirtualCamera.Follow = this.transform;
         ghostController.enabled = false;
@@ -45,6 +48,8 @@ public class GetInsideMobsForBoardy : MonoBehaviour
         yield return new WaitForSeconds(10);
         timerScript.enabled = !timerScript.enabled;
         text.text = "";
+        rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         VirtualCamera.Follow = player.transform;
         characterController2D.enabled = false;
         ghostController.enabled = true;
