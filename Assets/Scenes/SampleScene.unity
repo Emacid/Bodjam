@@ -5199,6 +5199,10 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6484187023742948398, guid: e37918cac124ded4884f5b68ec5e6db4, type: 3}
+      propertyPath: getInsideMobs
+      value: 
+      objectReference: {fileID: 2038589724}
     - target: {fileID: 7545746807869222365, guid: e37918cac124ded4884f5b68ec5e6db4, type: 3}
       propertyPath: m_RootOrder
       value: -1
