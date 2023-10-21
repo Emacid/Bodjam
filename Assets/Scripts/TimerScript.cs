@@ -6,6 +6,7 @@ public class TimerScript : MonoBehaviour
 {
     public float TimeLeft;
     public bool TimerOn = false;
+    public GetInsideMobs getInsideMobs;
 
     public Text TimerTxt;
    
@@ -27,6 +28,7 @@ public class TimerScript : MonoBehaviour
             {
                 Debug.Log("Time is UP!");
                 TimeLeft = 0;
+                getInsideMobs.GetBackToCharacter();
                 TimerOn = false;
             }
         }
