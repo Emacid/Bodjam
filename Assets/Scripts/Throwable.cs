@@ -9,11 +9,13 @@ public class Throwable : MonoBehaviour
     Vector3 throwVector;
     Rigidbody2D rb;
     LineRenderer lineRenderer;
+    public CinemachineRecomposer recomposer;
 
     private void Awake()
     {
         rb = this.GetComponent<Rigidbody2D>();
         lineRenderer = this.GetComponent<LineRenderer>();
+        
     }
 
     private void OnMouseDown()
@@ -48,6 +50,7 @@ public class Throwable : MonoBehaviour
     {
         RemoveArrow();
         Throw();
+        recomposer.m_ZoomScale = 1;
     }
 
     void RemoveArrow() 
