@@ -8,29 +8,24 @@ public class Dash : MonoBehaviour
     public float dashDistance = 5f; // Dash mesafesi
     public float dashDuration = 0.2f; // Dash süresi
     private bool isDashing = false;
-    private int dashCount = 0;
+    private bool canDash = true;
     private float lastDashTime = -1f;
-    private float doubleTapTimeThreshold = 0.5f;
+    private float dashCooldown = 2.0f; // Dash kullaným aralýðý
+    private KeyCode dashKey = KeyCode.LeftShift;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A))
+        if (canDash && ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && Input.GetKeyDown(dashKey)))
         {
-            float currentTime = Time.time;
-            if (currentTime - lastDashTime <= doubleTapTimeThreshold)
-            {
-                if (dashCount < 2)
-                {
-                    Vector3 dashDirection = Input.GetKeyDown(KeyCode.D) ? Vector3.right : Vector3.left;
-                    StartCoroutine(PerformDash(dashDirection));
-                    dashCount++;
-                }
-            }
-            else
-            {
-                lastDashTime = currentTime;
-                dashCount = 1;
-            }
+            Vector3 dashDirection = Input.GetKey(KeyCode.A) ? Vector3.left : Vector3.right;
+            StartCoroutine(PerformDash(dashDirection));
+            canDash = false;
+            lastDashTime = Time.time;
+        }
+
+        if (!canDash && Time.time - lastDashTime >= dashCooldown)
+        {
+            canDash = true;
         }
     }
 
@@ -50,12 +45,6 @@ public class Dash : MonoBehaviour
         }
 
         isDashing = false;
-        StartCoroutine(waitAndSetLayer());
-    }
-
-    IEnumerator waitAndSetLayer()
-    {
-        yield return new WaitForSeconds(.5f);
         player.layer = 6;
     }
 }
