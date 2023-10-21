@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -13,7 +14,9 @@ public class CharacterControllerForBrawler : MonoBehaviour
     public float gravityScale = 1.5f;
     public Camera mainCamera;
     private Animator animator;
+    
 
+    public bool hitGroundCheck = false;
     bool facingRight = true;
     float moveDirection = 0;
     bool isGrounded = false;
@@ -33,6 +36,7 @@ public class CharacterControllerForBrawler : MonoBehaviour
         r2d.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         r2d.gravityScale = gravityScale;
         facingRight = t.localScale.x > 0;
+        
 
         if (mainCamera)
         {
@@ -43,20 +47,27 @@ public class CharacterControllerForBrawler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       /* 
         // Movement controls
         if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && (isGrounded || Mathf.Abs(r2d.velocity.x) > 0.01f))
         {
             moveDirection = Input.GetKey(KeyCode.A) ? -1 : 1;
-            animator.SetBool("isWalking", true);
+            //animator.SetBool("isWalking", true);
         }
         else
         {
-            animator.SetBool("isWalking", false);
+            //animator.SetBool("isWalking", false);
             if (isGrounded || r2d.velocity.magnitude < 0.01f)
             {
                 moveDirection = 0;
             }
+        }
+       */
+
+        if (Input.GetKey(KeyCode.Q)) 
+        {
+            StartCoroutine(HitTheGroundJack());
+            
         }
 
         // Change facing direction
@@ -73,12 +84,14 @@ public class CharacterControllerForBrawler : MonoBehaviour
                 t.localScale = new Vector3(-Mathf.Abs(t.localScale.x), t.localScale.y, t.localScale.z);
             }
         }
-
+        
+        /*
         // Jumping
         if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
             r2d.velocity = new Vector2(r2d.velocity.x, jumpHeight);
         }
+        */
 
         // Camera follow
         if (mainCamera)
@@ -115,4 +128,23 @@ public class CharacterControllerForBrawler : MonoBehaviour
         Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(0, colliderRadius, 0), isGrounded ? Color.green : Color.red);
         Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(colliderRadius, 0, 0), isGrounded ? Color.green : Color.red);
     }
+
+    private IEnumerator HitTheGroundJack() 
+    {
+        
+        animator.SetBool("isHitGround", true);
+        
+        yield return new WaitForSeconds(1f);
+        hitGroundCheck = true;
+        StartCoroutine(WaitBro());
+        animator.SetBool("isHitGround", false);
+        
+    }
+    
+    private IEnumerator WaitBro() 
+    {
+        yield return new WaitForSeconds(2);
+        hitGroundCheck = false;
+    }
+    
 }
