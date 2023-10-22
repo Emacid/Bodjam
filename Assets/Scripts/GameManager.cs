@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject bubblePrefab;
     public CinemachineVirtualCamera vcCamera;
     public CinemachineRecomposer recomposer;
-    
+    public ElectricArea electricArea;
+
     void Start()
     {
         
@@ -20,9 +21,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            
+            StartCoroutine(electricArea.GameOver());
         }
     }
 }

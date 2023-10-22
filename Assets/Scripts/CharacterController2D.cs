@@ -14,6 +14,7 @@ public class CharacterController2D : MonoBehaviour
     public Camera mainCamera;
     private Animator animator;
     public GetInsideMobs getInsideMobs;
+    public GameObject explosionArea;
 
     bool facingRight = true;
     float moveDirection = 0;
@@ -62,6 +63,7 @@ public class CharacterController2D : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Q)) 
         {
+            explosionArea.gameObject.SetActive(true);
             StartCoroutine(getInsideMobs.GetBackToCharacterTwo());
         }
 

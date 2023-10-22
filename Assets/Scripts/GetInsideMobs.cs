@@ -17,7 +17,7 @@ public class GetInsideMobs : MonoBehaviour
     public ParticleSystem explodeParticle;
     private SpriteRenderer spriteRenderer;
     public GameObject DroneCanvas;
-
+    public GameObject explosionAreaObject;
     private void Awake()
     {
         characterController2D = GetComponent<CharacterController2D>();
@@ -42,6 +42,7 @@ public class GetInsideMobs : MonoBehaviour
     {
         Debug.Log("ABÝMM!");
         yield return new WaitForSeconds(10);
+        explosionAreaObject.SetActive(true);
         timerScript.enabled = !timerScript.enabled;
         text.text = "";
         VirtualCamera.Follow = player.transform;
@@ -49,6 +50,7 @@ public class GetInsideMobs : MonoBehaviour
         ghostController.enabled = true;
         explodeParticle.Play();
         spriteRenderer.enabled = false;
+        DroneCanvas.SetActive(false);
         StartCoroutine(DestroyDelayed());
         //Destroy(gameObject);
 
@@ -65,6 +67,7 @@ public class GetInsideMobs : MonoBehaviour
         ghostController.enabled = true;
         explodeParticle.Play();
         spriteRenderer.enabled = false;
+        DroneCanvas.SetActive(false);
         StartCoroutine(DestroyDelayed());
         //Destroy(gameObject);
 

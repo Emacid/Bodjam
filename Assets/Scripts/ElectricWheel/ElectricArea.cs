@@ -34,7 +34,7 @@ public class ElectricArea : MonoBehaviour
         }
     }
 
-     IEnumerator GameOver() 
+    public IEnumerator GameOver() 
     {
         Debug.Log("GameOver Çalýþtý!");
         animator.Play("FadeOut");
